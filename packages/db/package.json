@@ -1,0 +1,19 @@
+{
+  "name": "@eterna/db",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.29.5",
+    "postgres": "^3.4.5"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.20.14",
+    "typescript": "^5.3.3"
+  }
+} 

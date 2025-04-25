@@ -1,0 +1,10 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/auth/signin/route": "app/api/auth/signin/route.js",
+  "/api/auth/signup/route": "app/api/auth/signup/route.js",
+  "/auth/signin/page": "app/auth/signin/page.js",
+  "/auth/signup/page": "app/auth/signup/page.js",
+  "/(full-width-pages)/(auth)/signin/page": "app/(full-width-pages)/(auth)/signin/page.js",
+  "/(full-width-pages)/(auth)/signup/page": "app/(full-width-pages)/(auth)/signup/page.js",
+  "/(full-width-pages)/page": "app/(full-width-pages)/page.js"
+}

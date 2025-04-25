@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1745516025279,
+      "tag": "0000_red_lady_vermin",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1745523901218,
+      "tag": "0001_clear_lockheed",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1745527669621,
+      "tag": "0002_tiny_meggan",
+      "breakpoints": true
+    }
+  ]
+}

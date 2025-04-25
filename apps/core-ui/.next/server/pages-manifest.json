@@ -1,0 +1,17 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/aiuto-nfc": "pages/aiuto-nfc.js",
+  "/api/auth/me": "pages/api/auth/me.js",
+  "/api/profile/update": "pages/api/profile/update.js",
+  "/api/register": "pages/api/register.js",
+  "/api/register/professionista": "pages/api/register/professionista.js",
+  "/api/register/request-token": "pages/api/register/request-token.js",
+  "/dashboard": "pages/dashboard.js",
+  "/dashboard/profile": "pages/dashboard/profile.js",
+  "/dashboard/profilo": "pages/dashboard/profilo.js",
+  "/login": "pages/login.js",
+  "/register-professionista": "pages/register-professionista.js",
+  "/register": "pages/register.js",
+  "/_document": "pages/_document.js"
+}

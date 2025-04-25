@@ -1,0 +1,41 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1745334169885,
+      "tag": "0000_groovy_daredevil",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1745335278747,
+      "tag": "0001_amusing_starhawk",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1745335830436,
+      "tag": "0002_aromatic_magma",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1745342699964,
+      "tag": "0003_closed_blue_blade",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1745362197060,
+      "tag": "0004_bent_imperial_guard",
+      "breakpoints": true
+    }
+  ]
+}

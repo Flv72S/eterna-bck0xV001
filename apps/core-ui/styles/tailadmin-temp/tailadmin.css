@@ -1,0 +1,72 @@
+/* Colori principali */
+:root {
+  --primary: #3C50E0;
+  --primary-dark: #1B2B8F;
+  --primary-light: #EFF4FF;
+  --dark: #1C2434;
+  --dark-light: #2E3A47;
+  --stroke: #E2E8F0;
+  --stroke-dark: #2E3A47;
+  --boxdark: #1C2434;
+  --boxdark-light: #2E3A47;
+  --bodydark: #AEB7C0;
+  --bodydark-light: #DEE4EE;
+  --form-input: #DEE4EE;
+}
+
+/* Stili per i form */
+.form-input {
+  @apply w-full rounded-lg border border-stroke bg-transparent py-3 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-[var(--stroke-dark)] dark:bg-[var(--form-input)] dark:focus:border-primary;
+}
+
+/* Stili per i pulsanti */
+.btn-primary {
+  @apply w-full cursor-pointer rounded-lg border border-primary bg-primary p-3 text-white transition hover:bg-opacity-90;
+}
+
+.btn-secondary {
+  @apply w-full cursor-pointer rounded-lg border border-stroke bg-transparent p-3 text-black transition hover:bg-opacity-90 dark:border-[var(--stroke-dark)] dark:text-white;
+}
+
+/* Stili per le card */
+.card {
+  @apply rounded-lg border border-stroke bg-white p-6 shadow-md dark:border-[var(--stroke-dark)] dark:bg-[var(--boxdark)];
+}
+
+/* Stili per i titoli */
+.title {
+  @apply text-2xl font-bold text-black dark:text-white;
+}
+
+.subtitle {
+  @apply text-lg font-medium text-black dark:text-white;
+}
+
+/* Stili per i messaggi di errore */
+.error-message {
+  @apply mt-1 text-sm text-red-500;
+}
+
+/* Stili per le etichette */
+.label {
+  @apply mb-2.5 block font-medium text-black dark:text-white;
+}
+
+/* Stili per i contenitori */
+.container {
+  @apply mx-auto max-w-[480px] p-8;
+}
+
+/* Stili per lo sfondo */
+.bg-auth {
+  @apply min-h-screen bg-gray-50 dark:bg-[var(--boxdark)];
+}
+
+/* Stili per le immagini di sfondo */
+.bg-image {
+  @apply hidden lg:block lg:w-1/2;
+}
+
+.bg-image-content {
+  @apply relative h-full w-full;
+} 

@@ -1,0 +1,418 @@
+{
+  "id": "9d172cf0-f24b-4163-9590-654fe324a147",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "5",
+  "dialect": "pg",
+  "tables": {
+    "admin_sections": {
+      "name": "admin_sections",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "admin_id": {
+          "name": "admin_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sezione_id": {
+          "name": "sezione_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "admin_sections_admin_id_users_id_fk": {
+          "name": "admin_sections_admin_id_users_id_fk",
+          "tableFrom": "admin_sections",
+          "tableTo": "users",
+          "columnsFrom": [
+            "admin_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "admin_sections_sezione_id_eterna_sections_id_fk": {
+          "name": "admin_sections_sezione_id_eterna_sections_id_fk",
+          "tableFrom": "admin_sections",
+          "tableTo": "eterna_sections",
+          "columnsFrom": [
+            "sezione_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "eterna_sections": {
+      "name": "eterna_sections",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "slug": {
+          "name": "slug",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "descrizione": {
+          "name": "descrizione",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "stato": {
+          "name": "stato",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'attivo'"
+        },
+        "ordine": {
+          "name": "ordine",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "configurazione": {
+          "name": "configurazione",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'{}'::jsonb"
+        },
+        "colore_primario": {
+          "name": "colore_primario",
+          "type": "varchar(7)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "colore_secondario": {
+          "name": "colore_secondario",
+          "type": "varchar(7)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "eterna_sections_nome_unique": {
+          "name": "eterna_sections_nome_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "nome"
+          ]
+        },
+        "eterna_sections_slug_unique": {
+          "name": "eterna_sections_slug_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "slug"
+          ]
+        }
+      }
+    },
+    "users_pro": {
+      "name": "users_pro",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tipo_professione": {
+          "name": "tipo_professione",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "specializzazione": {
+          "name": "specializzazione",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nome_attivita": {
+          "name": "nome_attivita",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "partita_iva": {
+          "name": "partita_iva",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "indirizzo": {
+          "name": "indirizzo",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "città": {
+          "name": "città",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "regione": {
+          "name": "regione",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cap": {
+          "name": "cap",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "licenza": {
+          "name": "licenza",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sezione_id": {
+          "name": "sezione_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "approvato_admin": {
+          "name": "approvato_admin",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "users_pro_user_id_users_id_fk": {
+          "name": "users_pro_user_id_users_id_fk",
+          "tableFrom": "users_pro",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "users_pro_sezione_id_eterna_sections_id_fk": {
+          "name": "users_pro_sezione_id_eterna_sections_id_fk",
+          "tableFrom": "users_pro",
+          "tableTo": "eterna_sections",
+          "columnsFrom": [
+            "sezione_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pin": {
+          "name": "pin",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cognome": {
+          "name": "cognome",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "versione": {
+          "name": "versione",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "seriale_gioiello": {
+          "name": "seriale_gioiello",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sezione_id": {
+          "name": "sezione_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email_verificata": {
+          "name": "email_verificata",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "telefono_verificato": {
+          "name": "telefono_verificato",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "users_sezione_id_eterna_sections_id_fk": {
+          "name": "users_sezione_id_eterna_sections_id_fk",
+          "tableFrom": "users",
+          "tableTo": "eterna_sections",
+          "columnsFrom": [
+            "sezione_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "users_email_unique": {
+          "name": "users_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      }
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
