@@ -126,14 +126,15 @@ export async function signUp(userData: {
   nome: string;
   cognome: string;
   email: string;
+  sezione: string;
   password?: string;
   pin?: string;
   token?: string;
 }) {
   try {
     // Validazione input
-    if (!userData.nome || !userData.cognome || !userData.email) {
-      throw new Error('Nome, cognome ed email sono obbligatori');
+    if (!userData.nome || !userData.cognome || !userData.email || !userData.sezione) {
+      throw new Error('Nome, cognome, email e sezione sono obbligatori');
     }
 
     if (!isValidEmail(userData.email)) {
@@ -155,8 +156,8 @@ export async function signUp(userData: {
 
     // Inserimento utente con valori di default
     const result = await postgres.query(
-      `INSERT INTO users (nome, cognome, email, password, pin, token)
-       VALUES ($1, $2, $3, $4, $5, $6)
+      `INSERT INTO users (nome, cognome, email, password, pin, token, eterna_section)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)
        RETURNING *`,
       [
         userData.nome,
@@ -165,6 +166,7 @@ export async function signUp(userData: {
         hashedPassword,
         DEFAULT_PIN,
         DEFAULT_TOKEN,
+        userData.sezione
       ]
     );
 

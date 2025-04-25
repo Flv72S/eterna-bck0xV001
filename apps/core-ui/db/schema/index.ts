@@ -2,24 +2,14 @@ import { pgTable, serial, text, timestamp, varchar, uuid, boolean } from 'drizzl
 
 export const users = pgTable('users', {
   id: uuid('id').defaultRandom().primaryKey(),
+  fullName: varchar('fullName', { length: 255 }),
   email: varchar('email', { length: 255 }).notNull().unique(),
-  pin: text('pin').notNull(),
-  token: text('token'),
-  version: varchar('version', { length: 20 }).default('free'),
-  seriale_gioiello: varchar('seriale_gioiello', { length: 100 }),
-  nome: varchar('nome', { length: 100 }),
-  cognome: varchar('cognome', { length: 100 }),
-  ruolo: varchar('ruolo', { length: 30 }).default('utente'),
-  attivatore_validato: boolean('attivatore_validato').default(false),
-  nfc_supportato: boolean('nfc_supportato').default(true),
-  registrazione_via_nfc: boolean('registrazione_via_nfc').default(false),
-  otp: varchar('otp', { length: 10 }),
-  otp_scadenza: timestamp('otp_scadenza'),
-  verificato_email: boolean('verificato_email').default(false),
-  verificato_telefono: boolean('verificato_telefono').default(false),
-  ultima_login: timestamp('ultima_login').defaultNow(),
-  created_at: timestamp('created_at').defaultNow(),
-  updated_at: timestamp('updated_at').defaultNow(),
+  phone: varchar('phone', { length: 20 }),
+  passwordHash: text('passwordHash').notNull(),
+  eternaVersion: varchar('eternaVersion', { length: 20 }).default('free'),
+  isPremium: boolean('isPremium').default(false),
+  nfcCode: varchar('nfcCode', { length: 100 }),
+  createdAt: timestamp('createdAt').defaultNow(),
 });
 
 export const usersPro = pgTable('users_pro', {
@@ -61,13 +51,4 @@ export const pets = pgTable('pets', {
   birth_date: timestamp('birth_date'),
   created_at: timestamp('created_at').defaultNow().notNull(),
   updated_at: timestamp('updated_at').defaultNow().notNull(),
-});
-
-export const pet_medical_records = pgTable('pet_medical_records', {
-  id: serial('id').primaryKey(),
-  pet_id: serial('pet_id').references(() => pets.id),
-  record_type: varchar('record_type', { length: 50 }).notNull(),
-  description: text('description'),
-  date: timestamp('date').notNull(),
-  created_at: timestamp('created_at').defaultNow().notNull(),
 }); 

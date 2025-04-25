@@ -4,11 +4,11 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const config = {
-  schema: './db/schema/index.ts',
-  out: './db/migrations',
+  schema: './db/schema/pets.ts',
+  out: './db/migrations/pets',
   driver: 'pg',
   dbCredentials: {
-    connectionString: process.env.DATABASE_URL!,
+    connectionString: process.env.DATABASE_PETS_URL!,
   },
   verbose: true,
   strict: true,
