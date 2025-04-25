@@ -115,3 +115,74 @@ TWILIO_PHONE_NUMBER=...
 - Assicurarsi che il database sia correttamente migrato prima del deploy
 - Verificare che tutti i servizi necessari siano attivi e configurati
 - Testare il flusso completo di registrazione e login in ambiente di staging prima del deploy in produzione 
+
+# Procedura di Riavvio Eterna Backend
+
+## Configurazione Database
+
+### Database Principale (eterna)
+- Host: localhost
+- Porta: 5432
+- Database: eterna
+- Username: postgres
+- Password: N0nn0c4rl0!!
+
+### Database Eterna Pets (eterna_pets)
+- Host: localhost
+- Porta: 5432
+- Database: eterna_pets
+- Username: postgres
+- Password: N0nn0c4rl0!!
+
+## Struttura Database
+
+### Tabella users (eterna)
+Campi:
+- id (uuid) - Chiave primaria
+- fullName (varchar)
+- email (varchar) - NOT NULL, UNIQUE
+- phone (varchar)
+- passwordHash (text) - NOT NULL
+- eternaVersion (varchar) - default: 'free'
+- isPremium (boolean) - default: false
+- nfcCode (varchar)
+- createdAt (timestamp) - default: now()
+
+## Procedura di Riavvio
+
+1. **Avvio PostgreSQL**
+   - Verificare che il servizio PostgreSQL sia in esecuzione
+   - Verificare l'accesso ai database con pgAdmin
+
+2. **Configurazione Ambiente**
+   - Assicurarsi che il file `.env` sia presente in `apps/core-ui/` con le seguenti variabili:
+     ```
+     DATABASE_URL="postgresql://postgres:N0nn0c4rl0!!@localhost:5432/eterna"
+     DATABASE_PETS_URL="postgresql://postgres:N0nn0c4rl0!!@localhost:5432/eterna_pets"
+     JWT_SECRET="eterna-secret-key-2024"
+     ```
+
+3. **Migrazione Database**
+   - Eseguire la migrazione del database principale:
+     ```bash
+     cd apps/core-ui
+     npx drizzle-kit push:pg
+     ```
+   - Eseguire la migrazione del database eterna_pets:
+     ```bash
+     npx drizzle-kit push:pg --config=drizzle.config.pets.ts
+     ```
+
+4. **Verifica Struttura Database**
+   - Verificare in pgAdmin che le tabelle siano state create correttamente
+   - Verificare che i campi delle tabelle corrispondano allo schema definito
+
+5. **Avvio Applicazione**
+   - Avviare l'applicazione con il comando appropriato
+   - Verificare che non ci siano errori di connessione al database
+
+## Note Importanti
+- Mantenere sempre una copia di backup del file `.env`
+- Verificare le credenziali del database prima di ogni riavvio
+- In caso di errori durante la migrazione, controllare i log e verificare la connessione al database
+- Assicurarsi che tutti i servizi necessari siano in esecuzione prima di avviare l'applicazione 
