@@ -10,6 +10,9 @@ node_modules/
 /build
 /dist
 
+# Next.js
+.next/
+
 # Misc
 .DS_Store
 .env
