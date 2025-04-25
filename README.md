@@ -6,16 +6,46 @@ Sistema di gestione centralizzato per i prodotti Eterna.
 
 ```
 eterna-core/
-├── apps/
-│   └── core-ui/                  # Frontend React/NextJS
-├── packages/
-│   ├── db/                       # ORM/DB setup con Prisma
-│   ├── auth/                     # Modulo di autenticazione
-│   └── utils/                    # Funzioni condivise
-├── prisma/                      # Schema DB Prisma
-├── scripts/                     # Script SQL o shell
-└── .env                         # Variabili ambiente
+├── apps/                      # Applicazioni
+│   ├── api/                   # API Backend
+│   └── core-ui/               # Frontend Next.js
+├── packages/                  # Pacchetti condivisi
+│   ├── auth/                  # Autenticazione
+│   ├── db/                    # ORM/DB setup con Drizzle
+│   └── utils/                 # Utility
+├── src/                       # Codice sorgente principale
+│   ├── config/                # Configurazioni
+│   ├── controllers/           # Controller
+│   ├── routes/                # Route
+│   └── services/              # Servizi
+└── drizzle/                   # Schema DB Drizzle
 ```
+
+## Setup
+
+1. Clona il repository
+2. Installa le dipendenze:
+   ```bash
+   pnpm install
+   ```
+3. Configura il database:
+   ```bash
+   pnpm db:generate
+   pnpm db:push
+   ```
+4. Avvia l'applicazione:
+   ```bash
+   pnpm dev
+   ```
+
+## Dipendenze Principali
+
+- Next.js
+- React
+- Drizzle ORM
+- PostgreSQL
+- Tailwind CSS
+- NextAuth.js
 
 ## Requisiti
 
@@ -33,7 +63,8 @@ eterna-core/
 3. Configurare il file .env con le variabili necessarie
 4. Eseguire le migrazioni del database:
    ```bash
-   pnpm prisma migrate dev
+   pnpm db:generate
+   pnpm db:push
    ```
 5. Avviare l'applicazione:
    ```bash
@@ -68,14 +99,13 @@ eterna-core/
    - Assicurarsi che i token siano generati in modo sicuro
 
 ### Dipendenze da installare in produzione:
-- @prisma/client
 - react-hot-toast
 - twilio
 - bcrypt
 
 ### Variabili d'ambiente necessarie:
 ```env
-DATABASE_URL=postgresql://...
+DATABASE_URL=postgresql://postgres:N0nn0c4rl0!!@localhost:5432/eterna
 TWILIO_ACCOUNT_SID=...
 TWILIO_AUTH_TOKEN=...
 TWILIO_PHONE_NUMBER=...

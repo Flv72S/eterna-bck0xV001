@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-import { prisma } from '../config/prisma';
+import { db } from '../config/db';
+import { users } from '../../packages/db/src/schema';
+import { eq } from 'drizzle-orm';
 import { createOtpForUser, validateOtp } from '../services/otpService';
 import { generateToken } from '../utils/jwt';
 
@@ -35,17 +37,15 @@ export const register = async (req: Request<{}, {}, RegisterBody>, res: Response
 
     const passwordHash = await bcrypt.hash(password, 10);
 
-    const user = await prisma.user.create({
-      data: {
-        fullName,
-        email,
-        phone,
-        passwordHash,
-        eternaVersion,
-        isPremium,
-        nfcCode,
-      },
-    });
+    const [user] = await db.insert(users).values({
+      fullName,
+      email,
+      phone,
+      passwordHash,
+      eternaVersion,
+      isPremium,
+      nfcCode,
+    }).returning();
 
     const otp = await createOtpForUser(user.id);
     // Invia OTP via SMS/email in prod
@@ -59,9 +59,13 @@ export const register = async (req: Request<{}, {}, RegisterBody>, res: Response
 export const login = async (req: Request<{}, {}, LoginBody>, res: Response) => {
   try {
     const { email, password } = req.body;
-    const user = await prisma.user.findUnique({ where: { email } });
-    if (!user) return res.status(404).json({ error: "Utente non trovato" });
-
+    
+    const [user] = await db.select().from(users).where(eq(users.email, email));
+    
+    if (!user) {
+      return res.status(404).json({ error: 'Utente non trovato' });
+    }
+    
     const valid = await bcrypt.compare(password, user.passwordHash);
     if (!valid) return res.status(401).json({ error: "Credenziali non valide" });
 
@@ -87,12 +91,16 @@ export const verifyOtp = async (req: Request<{}, {}, VerifyOtpBody>, res: Respon
   }
 };
 
-export const loginViaNFC = async (req: Request<{}, {}, NfcLoginBody>, res: Response) => {
+export const loginWithNFC = async (req: Request<{}, {}, NfcLoginBody>, res: Response) => {
   try {
     const { nfcCode, password } = req.body;
-    const user = await prisma.user.findUnique({ where: { nfcCode } });
-    if (!user || !user.isPremium) return res.status(404).json({ error: "Utente NFC non trovato" });
-
+    
+    const [user] = await db.select().from(users).where(eq(users.nfcCode, nfcCode));
+    
+    if (!user || !user.isPremium) {
+      return res.status(404).json({ error: 'Utente NFC non trovato' });
+    }
+    
     const valid = await bcrypt.compare(password, user.passwordHash);
     if (!valid) return res.status(401).json({ error: "Credenziali non valide" });
 

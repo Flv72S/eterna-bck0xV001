@@ -1,8 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import prisma from '@eterna/db';
+import { db } from '@eterna/db';
+import { users } from '@eterna/db/schema';
+import { eq } from 'drizzle-orm';
 
-export function useUser() {
+export const useUser = async (userId: string) => {
+  const [user] = await db.select().from(users).where(eq(users.id, userId));
+  return user;
+};
+
+export function useUserOld() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
